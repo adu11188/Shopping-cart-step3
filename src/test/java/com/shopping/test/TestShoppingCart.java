@@ -22,14 +22,14 @@ public class TestShoppingCart {
 	}
 
 	@Test
-	public void testTotalPriceInEmptyCart() {
+	public void testEmptyCartTotalPrice() {
 		ShoppingCart shoppingCart = new ShoppingCart();
 		BigDecimal  totalPrice = shoppingCart.getTotalPriceOfProductsInCart();
 		Assert.assertEquals(0, totalPrice.compareTo(new BigDecimal("0")));
 	}
 	
 	@Test
-	public void testAddProductToShoppingCartForGivenQuantity() {
+	public void testAddProductToShoppingCartForQuantity() {
 		ShoppingCart shoppingCart = new ShoppingCart();
 		Product doveSoaps = new Soap(new BigDecimal("39.99"),5, "DoveSoap"); 
 		ShoppingCart cart = shoppingCart.addProductToCart(doveSoaps);
