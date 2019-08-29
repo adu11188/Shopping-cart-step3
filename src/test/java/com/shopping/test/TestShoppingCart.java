@@ -46,4 +46,24 @@ public class TestShoppingCart {
 		BigDecimal result = new BigDecimal("199.95");
 		Assert.assertEquals(result, totalPrice);
 	}
+	
+	@Test
+	public void testAddingOf5QuantitiesOfProductAndThenincreasedTo8InShoppingCart() {
+		ShoppingCart shoppingCart = new ShoppingCart();
+		Product doveSoaps = new Soap(new BigDecimal("39.99"),5, "DoveSoap"); 
+		ShoppingCart cart = shoppingCart.addProductToCart(doveSoaps);
+		doveSoaps.setQuantity(8);
+		int productQuantityInCart = cart.getTotalQuantitiesOfProductsInCart();
+		Assert.assertEquals(8, productQuantityInCart);
+	}
+	@Test
+	public void testTotalPriceInCartAfterAddingOf5QuantitiesOfProductAndThenincreasedTo8InShoppingCart() {
+		ShoppingCart shoppingCart = new ShoppingCart();
+		Product doveSoaps = new Soap(new BigDecimal("39.99"),5, "DoveSoap"); 
+		ShoppingCart cart = shoppingCart.addProductToCart(doveSoaps);
+		doveSoaps.setQuantity(8);
+		BigDecimal totalPrice = cart.getTotalPriceOfProductsInCart();
+		BigDecimal result = new BigDecimal("319.92");
+		Assert.assertEquals(result, totalPrice);
+	}
 }

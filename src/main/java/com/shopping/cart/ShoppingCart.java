@@ -6,6 +6,12 @@ import java.util.List;
 
 import com.shopping.product.Product;
 
+/**
+ * Shopping cart
+ * 
+ * @author adarshsumma
+ *
+ */
 public class ShoppingCart {
 
 	public ShoppingCart() {
@@ -14,6 +20,11 @@ public class ShoppingCart {
 
 	private List<Product> products;
 
+	/**
+	 * Get the total number of products in the shopping cart
+	 * 
+	 * @return
+	 */
 	public int getTotalQuantitiesOfProductsInCart() {
 		int totalQuantityInCart = 0;
 		for (Product product : products) {
@@ -22,11 +33,22 @@ public class ShoppingCart {
 		return totalQuantityInCart;
 	}
 
+	/**
+	 * Add a given product to the shopping cart
+	 * 
+	 * @param product
+	 * @return
+	 */
 	public ShoppingCart addProductToCart(Product product) {
 		products.add(product);
 		return this;
 	}
 
+	/**
+	 * Get total price of the all the items in the shopping cart
+	 * 
+	 * @return
+	 */
 	public BigDecimal getTotalPriceOfProductsInCart() {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		for (Product product : products) {

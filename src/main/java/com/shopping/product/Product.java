@@ -1,7 +1,12 @@
 package com.shopping.product;
 
 import java.math.BigDecimal;
-
+/**
+ * Product 
+ * 
+ * @author adarshsumma
+ *
+ */
 public abstract class Product {
 
 	private String name;
