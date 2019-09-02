@@ -1,7 +1,12 @@
 package com.shopping.product;
 
 import java.math.BigDecimal;
-
+/**
+ *  A Deo product
+ *  
+ * @author adarshsumma
+ *
+ */
 public class Deo extends Product {
 
 	private BigDecimal volume;
