@@ -54,6 +54,11 @@ public class ShoppingCart {
 		return totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
+	/**
+	 * Calculate total price of products in the cart
+	 * 
+	 * @return
+	 */
 	private BigDecimal computeTotalPrice() {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		for (Product product : products) {
@@ -63,6 +68,12 @@ public class ShoppingCart {
 		return totalPrice;
 	}
 
+	/**
+	 * Calculate total price of products in cart with sales tax
+	 * 
+	 * @param salesTaxRate
+	 * @return
+	 */
 	public BigDecimal getTotalPriceOfProductsInCartWithSalesTax(float salesTaxRate) {
 		BigDecimal totalPrice = computeTotalPrice();
 		BigDecimal salexTaxAmount = getTotalSalesTaxAmount(salesTaxRate,totalPrice);
@@ -70,6 +81,13 @@ public class ShoppingCart {
 		return finalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 	
+	/**
+	 * Calculate total sales tax amount
+	 * 
+	 * @param salesTaxRate
+	 * @param totalPrice
+	 * @return
+	 */
 	public BigDecimal getTotalSalesTaxAmount(float salesTaxRate,BigDecimal totalPrice) {
 		float salesTaxFactor = salesTaxRate/100;
 		return totalPrice.multiply(BigDecimal.valueOf(salesTaxFactor));
