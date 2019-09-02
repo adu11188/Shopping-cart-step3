@@ -7,8 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.shopping.cart.ShoppingCart;
-import com.shopping.product.Soap;
+import com.shopping.product.Deo;
 import com.shopping.product.Product;
+import com.shopping.product.Soap;
 
 
 public class TestShoppingCart {
@@ -65,5 +66,36 @@ public class TestShoppingCart {
 		BigDecimal totalPrice = cart.getTotalPriceOfProductsInCart();
 		BigDecimal result = new BigDecimal("319.92");
 		Assert.assertEquals(result, totalPrice);
+	}
+	@Test
+	public void testTotalPriceInCartAfterAddingOf2QuantitiesOfSoapAnd2QuantitiesOfDeo() {
+		ShoppingCart shoppingCart = new ShoppingCart();
+		Product doveSoaps = new Soap(new BigDecimal("39.99"),2, "DoveSoap"); 
+		ShoppingCart cart = shoppingCart.addProductToCart(doveSoaps);
+		Product Deos = new Deo("AxeDeo",2,new BigDecimal("99.99"));
+		shoppingCart.addProductToCart(Deos);
+		BigDecimal totalPrice = cart.getTotalPriceOfProductsInCart();
+		BigDecimal result = new BigDecimal("279.96");
+		Assert.assertEquals(result, totalPrice);
+	}
+	@Test
+	public void testComputeSalesTaxAmount() {
+		ShoppingCart shoppingCart = new ShoppingCart();
+		BigDecimal salesTaxAmount = shoppingCart.getTotalSalesTaxAmount(12.5f, BigDecimal.valueOf(279.96));
+		BigDecimal result = new BigDecimal("34.99500");
+		Assert.assertEquals(result, salesTaxAmount);
+	}
+	@Test
+	public void testSalesTaxInCartAfterAddingOf2QuantitiesOfSoapAnd2QuantitiesOfDeo() {
+		ShoppingCart shoppingCart = new ShoppingCart();
+		Product doveSoaps = new Soap(new BigDecimal("39.99"),2, "DoveSoap"); 
+		ShoppingCart cart = shoppingCart.addProductToCart(doveSoaps);
+		Product deos = new Deo("AxeDeo",2,new BigDecimal("99.99"));
+		shoppingCart.addProductToCart(deos);
+		BigDecimal totalPrice = cart.getTotalPriceOfProductsInCart();
+		BigDecimal totalPriceWithTax = cart.getTotalPriceOfProductsInCartWithSalesTax(12.5f);
+		BigDecimal result = new BigDecimal("35.00");
+		BigDecimal salexTax = totalPriceWithTax.subtract(totalPrice);
+		Assert.assertEquals(result, salexTax);
 	}
 }

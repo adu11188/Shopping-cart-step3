@@ -50,12 +50,28 @@ public class ShoppingCart {
 	 * @return
 	 */
 	public BigDecimal getTotalPriceOfProductsInCart() {
+		BigDecimal totalPrice = computeTotalPrice();
+		return totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	private BigDecimal computeTotalPrice() {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		for (Product product : products) {
 			BigDecimal totalProductPrice = product.getUnitPrice().multiply(new BigDecimal(product.getQuantity()));
 			totalPrice = totalPrice.add(totalProductPrice);
 		}
-		return totalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+		return totalPrice;
 	}
 
+	public BigDecimal getTotalPriceOfProductsInCartWithSalesTax(float salesTaxRate) {
+		BigDecimal totalPrice = computeTotalPrice();
+		BigDecimal salexTaxAmount = getTotalSalesTaxAmount(salesTaxRate,totalPrice);
+		BigDecimal finalPrice = totalPrice.add(salexTaxAmount);
+		return finalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+	
+	public BigDecimal getTotalSalesTaxAmount(float salesTaxRate,BigDecimal totalPrice) {
+		float salesTaxFactor = salesTaxRate/100;
+		return totalPrice.multiply(BigDecimal.valueOf(salesTaxFactor));
+	}
 }
